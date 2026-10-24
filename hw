@@ -1,0 +1,51 @@
+## 10. Process Stream Redirection and Error Handling
+
+### Correct Operation
+
+```bash
+user@kalii:~\$ ps -eo pid,ppid,cmd,%cpu --sort=-%cpu 1> cpu_processes.log
+user@kalii:~\$ head -n 4 cpu_processes.log
+  PID  PPID CMD                         %CPU
+ 1245  1200 /usr/lib/firefox/firefox     4.2
+  940   850 /usr/bin/Xorg                1.8
+```
+
+### Error Handling Demonstration
+
+```bash
+user@kalii:~\$ pxs -eo pid,ppid,cmd,%cpu --sort=-%cpu 1> cpu_processes.log
+bash: pxs: command not found
+
+user@kalii:~\$ cat cpu_processes.log
+
+```
+-------
+
+
+### Querying Top 10 Active User Processes
+
+```bash
+user@kalii:~\$ ps -u \$USER -eo pid,cmd,%cpu --sort=-%cpu | head -n 11 | tee user_top10.log
+  PID CMD                         %CPU
+ 1245 /usr/lib/firefox/firefox     3.8
+  940 /usr/bin/Xorg                1.5
+ 2102 /usr/bin/qterminal           0.4
+ 1530 /usr/lib/firefox/isolated    0.2
+ 2844 /bin/bash                    0.0
+ 2910 ps -u user -eo pid,cmd,%cpu  0.0
+```
+------------------
+
+```bash
+sudo nmap -p 22,80,9929 -p 50-100 --top-ports 20 -sV -O scanme.nmap.org
+```
+
+
+---
+
+
+```bash
+nmap -p 22,80,9929,8080 -oG - scanme.nmap.org
+```
+
+
